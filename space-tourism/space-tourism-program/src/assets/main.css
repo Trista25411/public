@@ -1,0 +1,4 @@
+@import "tailwindcss" layer(base); /* 告訴 IDE 這是 Tailwind 層級 */
+@import "./base.css";
+
+

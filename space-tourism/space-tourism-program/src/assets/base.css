@@ -1,20 +1,20 @@
 :root {
-    /* 字體大小 */
-    --text-preset-1: 144px;
-    --text-preset-2: 96px;
-    --text-preset-3: 56px;
-    --text-preset-4: 32px;
-    --text-preset-5: 28px;
-    --text-preset-6: 28px;
-    --text-preset-7: 14px;
-    --text-preset-8: 16px;
-    --text-preset-8-bold: 16px;
-    --text-preset-9: 18px;
+    /* 字體 */
+    --fonts-1: "Bellefair", serif;
+    --fonts-2: "Barlow Condensed", sans-serif;
+    --fonts-3: "Barlow", sans-serif;
 
-    /* 字型 */
-    --fonts-1: "Bellefair";
-    --fonts-2: "Barlow Condensed";
-    --fonts-3: "Barlow";
+    /* 手機版字體大小 */
+    --text-preset-1: 80px;
+    --text-preset-2: 56px;
+    --text-preset-3: 24px;
+    --text-preset-4: 18px;
+    --text-preset-5: 28px;
+    --text-preset-6: 16px;
+    --text-preset-7: 14px;
+    --text-preset-8: 14px;
+    --text-preset-8-bold: 16px;
+    --text-preset-9: 15px;
 
     /* 粗體 */
     --font-weight-regular: 400;
@@ -31,16 +31,21 @@
     }
 }
 
-@media (min-width:375px) {
+@media (min-width:1440px) {
     :root {
-        --text-preset-1: 80px;
-        --text-preset-2: 56px;
-        --text-preset-3: 24px;
-        --text-preset-4: 18px;
-        --text-preset-6: 16px;
-        --text-preset-8: 14px;
-        --text-preset-9: 15px;
+        --text-preset-1: 144px;
+        --text-preset-2: 96px;
+        --text-preset-3: 56px;
+        --text-preset-4: 32px;
+        --text-preset-6: 28px;
+        --text-preset-8: 16px;
+        --text-preset-9: 18px;
     }
+}
+
+.text-preset-1 {
+    font-size: var(--text-preset-1);
+    font-family: var(--fonts-1);
 }
 
 .text-preset-5 {

@@ -1,10 +1,8 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import NavBar from './components/NavBar.vue';
 </script>
 
 <template>
-  <NavBar />
   <main>
     <!-- 要有router-view才能匯入homeview東西 -->
     <router-view />
