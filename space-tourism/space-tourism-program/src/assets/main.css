@@ -1,4 +1,5 @@
-@import "tailwindcss" layer(base); /* 告訴 IDE 這是 Tailwind 層級 */
+/* main.css => 入口網，整合規範應用於什麼地方上 */
 @import "./base.css";
+
 
 
