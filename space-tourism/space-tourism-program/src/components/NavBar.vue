@@ -13,7 +13,7 @@ const navItems = [
 </script>
 
 <template>
-    <div class="navbar bg-transparent h-[135px] flex">
+    <div class="navbar bg-transparent h-[135px] flex overflow-x-hidden">
         <div class="nav-left bg-transparent flex flex-grow items-center">
             <!-- png才支援透明度，jpg無法 -->
             <img src="../assets/Logo.png" alt="logo">

@@ -13,7 +13,11 @@ import { RouterView } from 'vue-router'
   body{
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
   }
+
+  /* 檢查是哪個寬度超出使用 */
+* {
+    outline: 1px solid red !important;
+}
   
 </style>
