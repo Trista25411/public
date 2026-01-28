@@ -16,8 +16,8 @@ import { RouterView } from 'vue-router'
   }
 
   /* 檢查是哪個寬度超出使用 */
-* {
+/* * {
     outline: 1px solid red !important;
-}
+} */
   
 </style>

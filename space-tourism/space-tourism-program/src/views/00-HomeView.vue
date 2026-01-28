@@ -28,8 +28,6 @@ import NavBar from '@/components/NavBar.vue';
 <style scoped>
 .home-container {
     width: 100%;
-    /* 原先設置 height 在程式往下掉的時候圖片不會跟著往下延伸，改成 min-height */
-    min-height: 100vh;
     background-image: url(../assets/Render-1.jpg);
     background-position: center;
     background-size: cover;

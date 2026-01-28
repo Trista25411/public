@@ -13,12 +13,10 @@ const navItems = [
 </script>
 
 <template>
-    <div class="navbar bg-transparent h-[135px] flex overflow-x-hidden">
-        <div class="nav-left bg-transparent flex flex-grow items-center">
-            <!-- png才支援透明度，jpg無法 -->
-            <img src="../assets/Logo.png" alt="logo">
-            <div class="h-[1px] bg-white opacity-25 flex-grow translate-x-8 z-10"></div>
-        </div>
+    <div class="navbar bg-transparent h-[135px] p-[40px_0_0_64px] flex overflow-x-hidden">
+        <!-- png才支援透明度，jpg無法 -->
+        <img src="../assets/Logo.png" alt="logo" class="bg-transparent w-[48px] h-[48px] m-[auto_30px_auto_-20px]">
+        <div class="h-[1px] bg-white opacity-25 my-auto flex-grow translate-x-8 z-10"></div>
         <!-- 原先寫法 -->
         <!-- <div class="nav-right bg-red-500 px-[64px] flex gap-[48px]">
             <div class="blo flex gap-[8px] items-center">
@@ -50,7 +48,7 @@ const navItems = [
         <!-- 加入底線+導入其他頁面 -->
         <!-- $router.push => (讀取狀態) => 「切換頁面」而不重新整理網頁 -->
         <!-- $router => (發送指令) => 前面判斷，後面判斷後看是否需切換頁面 -->
-        <div class="nav-right cursor-pointer bg-white/5 backdrop-blur-[80px] px-[64px] flex gap-[48px]">
+        <div class="cursor-pointer bg-white/5 backdrop-blur-[80px] px-[64px] flex gap-[48px] md:px-[20px]">
             <div v-for="(item, index) in navItems" @click="$router.push(item.path)"
                 class="blo flex gap-[8px] items-center text-white border-b-[3px] hta"
                 :class="$route.path === item.path ? 'border-white' : 'border-transparent hover:border-white/50'">
@@ -61,9 +59,3 @@ const navItems = [
         </div>
     </div>
 </template>
-
-<style>
-.navbar {
-    padding: 40px 0 0 64px;
-}
-</style>
