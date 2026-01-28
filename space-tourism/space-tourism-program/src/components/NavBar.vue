@@ -13,9 +13,12 @@ const navItems = [
 </script>
 
 <template>
-    <div class="navbar bg-transparent h-[135px] p-[40px_0_0_64px] flex overflow-x-hidden">
+    <!-- <div class="hamburger"></div> -->
+
+
+    <div class="navbar bg-transparent h-[135px] p-[40px_0_0_64px] flex overflow-x-hidden md:pl-[10px]">
         <!-- png才支援透明度，jpg無法 -->
-        <img src="../assets/Logo.png" alt="logo" class="bg-transparent w-[48px] h-[48px] m-[auto_30px_auto_-20px]">
+        <img src="../assets/Logo.png" alt="logo" class="bg-transparent w-[48px] h-[48px] m-[auto_30px]">
         <div class="h-[1px] bg-white opacity-25 my-auto flex-grow translate-x-8 z-10"></div>
         <!-- 原先寫法 -->
         <!-- <div class="nav-right bg-red-500 px-[64px] flex gap-[48px]">
