@@ -16,32 +16,33 @@ const getImg = (name) => {
 </script>
 
 <template>
-    <div class="whole-container">
+    <div class="home-container flex flex-col">
         <NavBar />
-        <div class="container mx-auto p-[24px] sm:p-[40px] md:p-[48px]">
-            <div class="flex flex-col md:gap-[24px]">
-                <div class="text-white text-center mb-[24px] md:mb-[0px] sm:text-start">
+        <div class="py-[48px] lg:pl-[165px]">
+            <div class="flex flex-col gap-[24px]">
+                <div class="text-white text-center pl-[40px] lg:p-[0px] sm:text-start">
                     <span class="pr-[24px] font-bold opacity-25 text-preset-6 md:text-preset-5">03</span>
                     <span class="text-preset-6 md:text-preset-5">SPACE LAUNCH 101</span>
                 </div>
-                <div class="flex gap-[32px] flex-col-reverse lg:flex-row">
-                    <div class="text-white text-center grid lg:grid-flow-col md:text-start lg:w-[630px]">
-                        <div class="flex justify-center gap-[32px] mb-[40px] lg:m-[0_32px_0_0] lg:flex-col">
+                <div class="flex flex-col-reverse justify-between items-center lg:flex-row gap-[32px]">
+                    <div class="text-white max-w-[630px] h-[350px] flex flex-col lg:m-auto lg:flex-row lg:gap-[64px]">
+                        <div class="flex justify-center items-center gap-[8px] lg:flex-col lg:gap-[16px] sm:gap-[32px]">
                             <button v-for="(item, index) in Tech" @click="current = index" :key="index"
-                                class="rounded-full text-preset-4 size-14 border border-white/20 lg:size-20"
-                                :class="current === index ? 'bg-white opacity-100 text-black' : 'bg-transparent text-white hover:bg-white'">
-                            {{ index + 1 }}
+                                class="rounded-full text-preset-4 size-10 border border-white/20 lg:size-20 sm:size-14"
+                                :class="current === index ? 'bg-white opacity-100 text-black' : 'bg-transparent text-white hover:bg-white hover:text-black'">
+                                {{ index + 1 }}
                             </button>
                         </div>
-                        <div class="my-auto text-center lg:text-start">
-                            <div class="text-preset-4">THE TERMINOLOGY…</div>
-                            <div class="text-preset-3">{{ Tech[current].name }}</div>
+                        <div class="my-auto text-center lg:text-start mt-[40px] p-[24px] lg:mt-[0px] sm:p-[0px]">
+                            <div class="text-preset-4 mb-[16px]">THE TERMINOLOGY…</div>
+                            <div class="text-preset-3 mb-[24px]">{{ Tech[current].name }}</div>
                             <div class="text-preset-9">{{ Tech[current].intr }}</div>
                         </div>
                     </div>
-                    <div class="flex m-auto h-[360px] lg:w-[600px] lg:h-[600px]">
+                    <!-- 照片放不滿版，用w-full跟w-auto，還有object-cover調整 -->
+                    <div class="w-full lg:w-auto">
                         <img :key="current" :src="getImg(Tech[current].img)" :alt="Tech[current].name"
-                            class="object-contain">
+                            class="w-full object-cover h-[350px] lg:h-[600px] lg:object-contain">
                     </div>
                 </div>
             </div>
@@ -50,7 +51,7 @@ const getImg = (name) => {
 </template>
 
 <style scoped>
-.whole-container {
+.home-container {
     background-image: url(../assets/Render-4.jpg);
     background-position: center;
     background-size: cover;

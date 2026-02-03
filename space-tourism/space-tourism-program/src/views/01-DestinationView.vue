@@ -19,7 +19,7 @@ const getImg = (name) => {
 </script>
 
 <template>
-    <div class="whole-container">
+    <div class="home-container">
         <NavBar />
         <div class="container mx-auto p-[24px] sm:p-[40px] md:p-[48px]">
             <div class="flex flex-col gap-[24px]">
@@ -46,7 +46,7 @@ const getImg = (name) => {
                             <!-- 原先因字數不同，點選{{ item.name }}的時候會跟著變化，設定min-h多少就可以了 -->
                             <div class="blue-300 text-preset-9 text-center lg:text-start lg:h-[130px]">{{ nameItems[current].small }}</div>
                         </div>
-                        <div class="w-[100%] h-[1px] bg-white/25"></div>
+                        <div class="h-[1px] bg-white/25"></div>
                         <div class="gap-[24px] grid-flow-col sm:flex">
                             <div class="text-white flex flex-col gap-[12px] w-[210px] text-center lg:text-start">
                                 <p class="text-preset-7 blue-300">AVG. DISTANCE</p>
@@ -66,8 +66,7 @@ const getImg = (name) => {
 </template>
 
 <style scoped>
-.whole-container {
-    /* 原先設置 height 在程式往下掉的時候圖片不會跟著往下延伸，改成 min-height */
+.home-container {
     background-image: url(../assets/Render-2.jpg);
     background-position: center;
     background-size: cover;

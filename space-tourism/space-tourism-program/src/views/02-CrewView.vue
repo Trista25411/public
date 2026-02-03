@@ -17,7 +17,7 @@ const getImg = (name) => {
 </script>
 
 <template>
-    <div class="whole-container">
+    <div class="home-container">
         <NavBar />
         <div class="container mx-auto p-[24px] sm:p-[40px] md:p-[48px]">
             <div class="flex flex-col md:gap-[24px]">
@@ -25,7 +25,7 @@ const getImg = (name) => {
                     <span class="pr-[24px] font-bold opacity-25 text-preset-6 md:text-preset-5">02</span>
                     <span class="text-preset-6 md:text-preset-5">MEET YOUR CREW</span>
                 </div>
-                <div class="flex gap-[32px] items-end flex-col md:flex-row">
+                <div class=" md:h-[600px] flex gap-[32px] items-end flex-col md:flex-row">
                     <div class="text-white text-center md:text-start mt-[40px] md:w-[540px]">
                         <div class="md:h-[500px]">
                             <div class="text-preset-4 opacity-50 mb-[16px]">{{ Info[current].work }}</div>
@@ -55,7 +55,7 @@ const getImg = (name) => {
 </template>
 
 <style scoped>
-.whole-container {
+.home-container {
     background-image: url(../assets/Render-3.jpg);
     background-position: center;
     background-size: cover;

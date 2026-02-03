@@ -6,8 +6,8 @@ import NavBar from '@/components/NavBar.vue';
     <div class="home-container">
         <NavBar />
         <!-- 在最大的寬度為1110px，不然後面寫死很難做RWD -->
-        <div class="container max-w-[1110px] grid grid-cols-1 py-[130px] mx-auto mt-[200px] lg:grid-cols-2">
-            <div class="b-left text-white text-center w-[510px] mx-auto lg:text-start">
+        <div class="container max-w-[1110px] grid grid-cols-1 py-[130px] mx-auto mt-[24px] md:mt-[200px] lg:grid-cols-2">
+            <div class="b-left text-white text-center max-w-[510px] mx-auto lg:text-start">
                 <div class="text-preset-7 blue-300">SO, YOU WANT TO TRAVEL TO</div>
                 <div class="text-preset-1">SPACE</div>
                 <div class="text-preset-9 blue-300">Let’s face it; if you want to go to space, you might as well genuinely go to outer
