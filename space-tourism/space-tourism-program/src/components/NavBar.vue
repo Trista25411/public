@@ -35,10 +35,10 @@ const navigate = (path => {
         </button>
 
         <div :class="isOpen ? 'translate-x-0' : 'translate-x-full', 'md:translate-x-0'"
-        class="bg-[#0B0D17]/15 backdrop-blur-[80px] fixed top-0 right-0 w-[254px] h-full px-[40px] md:bg-white/5 md:w-auto md:h-[96px] md:static md:flex lg:px-[64px]">
+        class="bg-[#0B0D17]/15 backdrop-blur-[80px] fixed top-0 right-0 w-[254px] h-full px-[25px] md:bg-white/5 md:w-auto md:h-[96px] md:static md:flex lg:px-[64px]">
             <ul class="flex flex-col gap-[32px] p-[135px_0_135px_32px] md:flex-row md:p-[0_32px]">
                 <li v-for="(item, index) in navItems" @click="navigate(item.path)"
-                    class="text-white flex gap-[12px] border-r-[3px] md:border-b-[3px] md:border-r-[0px] items-center cursor-pointer hta"
+                    class="text-white flex gap-[12px] border-r-[3px] md:border-b-[3px] md:border-r-[0px] items-center cursor-pointer"
                     :class="$route.path === item.path ? 'border-white' : 'border-transparent hover:border-white/50'">
                     <span class="text-preset-8-bold">{{ String(index).padStart(2, '0') }}</span>
                     <span class="text-preset-8">{{ item.name }}</span>

@@ -1,6 +1,5 @@
 <script setup>
 import NavBar from '@/components/NavBar.vue';
-// 要先定義current
 import { ref } from 'vue';
 const current = ref(0);
 
@@ -18,7 +17,7 @@ const getImg = (name) => {
 <template>
     <div class="home-container flex flex-col">
         <NavBar />
-        <div class="py-[48px] lg:pl-[165px]">
+        <div class="py-[48px] lg:pl-[125px]">
             <div class="flex flex-col gap-[24px]">
                 <div class="text-white text-center pl-[40px] lg:p-[0px] sm:text-start">
                     <span class="pr-[24px] font-bold opacity-25 text-preset-6 md:text-preset-5">03</span>

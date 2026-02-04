@@ -36,7 +36,6 @@ import NavBar from '@/components/NavBar.vue';
 @media (max-width:1100px) {
     .container{
         padding: 130px 40px;
-    }
-    
+    }   
 }
 </style>
