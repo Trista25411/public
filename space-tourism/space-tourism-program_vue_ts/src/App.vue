@@ -1,5 +1,4 @@
 <template>
-  <!-- 要有router-view才能匯入homeview東西 -->
   <router-view v-slot="{ Component }">
     <transition name="dissolve" mode="out-in">
       <component :is="Component" />
@@ -23,14 +22,7 @@ body {
   opacity: 1;
 }
 
-
 .dissolve-leave-to {
   opacity: 0.5;
 }
-
-
-/* 檢查是哪個寬度超出使用 */
-/* * {
-    outline: 1px solid red !important;
-} */
 </style>

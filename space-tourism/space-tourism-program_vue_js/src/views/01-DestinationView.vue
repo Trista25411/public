@@ -15,7 +15,7 @@ const getImg = (name) => {
     // new URL(path, base)：構造函數 => 把「相對路徑」拼接到「當前檔案路徑」上，產生一個完整的資源網址
     //              ↓ 相對於這份vue檔的相對路徑, ↓ 目前這份vue檔在瀏覽器的絕對位置. href將url物件轉為字串給img的src使用
     return new URL(`../assets/${name}.png`, import.meta.url).href;
-}
+};
 </script>
 
 <template>
