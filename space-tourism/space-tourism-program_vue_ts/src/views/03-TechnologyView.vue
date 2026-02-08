@@ -33,7 +33,7 @@ const getImg = (name: string) => {
                     <div class="text-white max-w-[630px] h-[350px] flex flex-col lg:m-auto lg:flex-row lg:gap-16">
                         <div class="flex justify-center items-center gap-2 lg:flex-col lg:gap-4 sm:gap-8">
                             <button v-for="(item, index) in tech" @click="current = index" :key="index"
-                                class="rounded-full text-preset-4 size-10 border border-white/20 lg:size-20 sm:size-14"
+                                class="rounded-full text-preset-4 size-10 border border-white/20 cursor-pointer transition-all duration-300 ease-in-out lg:size-20 sm:size-14"
                                 :class="current === index ? 'bg-white opacity-100 text-black' : 'bg-transparent text-white hover:bg-white hover:text-black'">
                                 {{ index + 1 }}
                             </button>

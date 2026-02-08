@@ -3,7 +3,6 @@ import NavBar from '@/components/NavBar.vue';
 import { ref } from 'vue';
 
 const current = ref(0); // 呼叫函數並設定預設顯示第 0 個項目，若沒有寫0 => 只是把函數賦值給變數，沒有執行
-
 const nameItems = [
     { name: 'MOON', big: 'MOON', small: 'See our planet as you’ve never seen it before. A perfect relaxing trip away to help regain perspective and come back refreshed. While you’re there, take in some history by visiting the Luna 2 and Apollo 11 landing sites.', distance: '384,400 KM', time: '3 DAYS', img: '2-1-Moon' },
     { name: 'MARS', big: 'MARS', small: 'Don’t forget to pack your hiking boots. You’ll need them to tackle Olympus Mons, the tallest planetary mountain in our solar system. It’s two and a half times the size of Everest!', distance: '225 MIL. KM', time: '9 MONTHS', img: '2-2-Mars' },
@@ -36,7 +35,7 @@ const getImg = (name) => {
                         class="flex flex-col items-center mx-auto max-w-[540px] gap-[40px] lg:items-start md:p-[0px]">
                         <div class="flex gap-[32px]">
                             <button v-for="(item, index) in nameItems" :key="item.name" @click="current = index"
-                                class="text-white border-b-[3px] pb-[8px]"
+                                class="text-white border-b-[3px] pb-[8px] transition-all duration-300 ease-in-out"
                                 :class="current === index ? 'border-white' : 'border-transparent hover:border-white/50'">
                                 {{ item.name }}
                             </button>

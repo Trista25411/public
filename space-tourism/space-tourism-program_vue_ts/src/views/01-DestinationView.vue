@@ -40,7 +40,7 @@ const getImg = (name: string) => {
                     <div class="flex flex-col items-center mx-auto max-w-[540px] gap-10 lg:items-start md:p-0">
                         <div class="flex gap-8">
                             <button v-for="(item, index) in nameList" :key="item.name" @click="current = index"
-                                class="text-white border-b-[3px] pb-2"
+                                class="text-white border-b-[3px] pb-2 cursor-pointer transition-all duration-300 ease-in-out"
                                 :class="current === index ? 'border-white' : 'border-transparent hover:border-white/50'">
                                 {{ item.name }}
                             </button>

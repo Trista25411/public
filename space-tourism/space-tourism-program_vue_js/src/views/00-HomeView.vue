@@ -17,7 +17,7 @@ import NavBar from '@/components/NavBar.vue';
             <!--                                                 原先hover用border格式會跑掉，改用shadow不占空間不會移動位置 -->
             <!-- 使用router-link內部轉換，a會重新整理跳轉不用 -->
             <router-link to="/dest" class="b-right mx-auto mt-[80px] lg:m-auto">
-                <div class="bg-white w-[270px] h-[270px] rounded-full flex items-center justify-center hta hover:shadow-[0_0_0_88px_rgba(255,255,255,0.1)]">
+                <div class="bg-white w-[270px] h-[270px] rounded-full flex items-center justify-center transition-all duration-300 ease-in-out hover:shadow-[0_0_0_88px_rgba(255,255,255,0.1)]">
                     <div class="text-preset-4 blue-900">EXPLORE</div>
                 </div>
             </router-link>

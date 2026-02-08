@@ -40,7 +40,7 @@ const getImg = (name: string) => {
                         </div>
                         <div class="flex gap-4 pb-10 justify-center md:justify-start md:gap-10">
                             <button v-for="(item, index) in infoList" @click="current = index" :key="index"
-                                class="bg-white cursor-pointer rounded-full size-2 md:size-4"
+                                class="bg-white cursor-pointer rounded-full transition-all duration-300 ease-in-out size-2 md:size-4"
                                 :class="current === index ? 'bg-white opacity-100' : 'bg-white opacity-20'">
                             </button>
                         </div>

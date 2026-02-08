@@ -2,8 +2,8 @@
 import NavBar from '@/components/NavBar.vue';
 // 要先定義current
 import { ref } from 'vue';
-const current = ref(0);
 
+const current = ref(0);
 const Info = [
     { work: 'COMMANDER', name: 'DOUGLAS HURLEY', intr: 'Douglas Gerald Hurley is an American engineer, former Marine Corps pilot and former NASA astronaut. He launched into space for the third time as commander of Crew Dragon Demo-2.', img: '3-1-base' },
     { work: 'MISSION SPECIALIST', name: 'MARK SHUTTLEWORTH', intr: 'Mark Richard Shuttleworth is the founder and CEO of Canonical, the company behind the Linux-based Ubuntu operating system. Shuttleworth became the first South African to travel to space as a space tourist.', img: '3-2-preview' },
@@ -39,7 +39,7 @@ const getImg = (name) => {
                              3. 用opacity來顯示，若用bg-white跟bg-transpartent會不見
                              4. img也要綁定:key="current"-->
                             <button v-for="(item, index) in Info" @click="current = index" :key="index"
-                                class="bg-white cursor-pointer rounded-full size-2 md:size-4"
+                                class="bg-white cursor-pointer rounded-full size-2 md:size-4 transition-all duration-300 ease-in-out"
                                 :class="current === index ? 'bg-white opacity-100' : 'bg-white opacity-20'">
                             </button>
                         </div>

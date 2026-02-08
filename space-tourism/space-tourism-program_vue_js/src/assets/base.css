@@ -126,10 +126,4 @@
     .blue-300 {
         color: #D0D6F9;
     }
-
-    /* hover動畫 */
-    .hta{
-        transition-timing-function: ease-in-out;
-        transition-duration: 600ms;
-    }
 }

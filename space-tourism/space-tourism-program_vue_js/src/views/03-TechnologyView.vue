@@ -1,8 +1,8 @@
 <script setup>
 import NavBar from '@/components/NavBar.vue';
 import { ref } from 'vue';
-const current = ref(0);
 
+const current = ref(0);
 const Tech = [
     { name: 'LAUNCH VEHICLE', intr: "A launch vehicle or carrier rocket is a rocket-propelled vehicle used to carry a payload from Earth's surface to space, usually to Earth orbit or beyond. Our WEB-X carrier rocket is the most powerful in operation. Standing 150 metres tall, it's quite an awe-inspiring sight on the launch pad!", img: '4-1-Technology' },
     { name: 'SPACEPORT', intr: "A spaceport or cosmodrome is a site for launching (or receiving) spacecraft, by analogy to the seaport for ships or airport for aircraft. Based in the famous Cape Canaveral, our spaceport is ideally situated to take advantage of the Earth’s rotation for launch.", img: '4-2-Technology' },
@@ -27,7 +27,7 @@ const getImg = (name) => {
                     <div class="text-white max-w-[630px] h-[350px] flex flex-col lg:m-auto lg:flex-row lg:gap-[64px]">
                         <div class="flex justify-center items-center gap-[8px] lg:flex-col lg:gap-[16px] sm:gap-[32px]">
                             <button v-for="(item, index) in Tech" @click="current = index" :key="index"
-                                class="rounded-full text-preset-4 size-10 border border-white/20 lg:size-20 sm:size-14"
+                                class="rounded-full text-preset-4 size-10 border border-white/20 transition-all duration-300 ease-in-out lg:size-20 sm:size-14"
                                 :class="current === index ? 'bg-white opacity-100 text-black' : 'bg-transparent text-white hover:bg-white hover:text-black'">
                                 {{ index + 1 }}
                             </button>

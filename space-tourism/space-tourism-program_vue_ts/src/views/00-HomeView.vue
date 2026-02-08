@@ -14,7 +14,7 @@ import NavBar from '@/components/NavBar.vue';
                     truly out of this world experience!</div>
             </div>
             <router-link to="/dest" class="b-right mx-auto mt-20 lg:m-auto">
-                <div class="bg-white w-[270px] h-[270px] rounded-full flex items-center justify-center hta hover:shadow-[0_0_0_88px_rgba(255,255,255,0.1)]">
+                <div class="bg-white w-[270px] h-[270px] rounded-full flex items-center justify-center transition-all duration-300 ease-in-out hover:shadow-[0_0_0_88px_rgba(255,255,255,0.1)]">
                     <div class="text-preset-4 blue-900">EXPLORE</div>
                 </div>
             </router-link>
