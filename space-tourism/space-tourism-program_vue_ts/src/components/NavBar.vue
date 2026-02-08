@@ -47,7 +47,7 @@ const navigate = (path: string) => {
         <!-- 原先寫法是 <div :class="isOpen ? 'translate-x-0' : 'translate-x-full', 'md:translate-x-0'"
          但中間的 , 在標準 HTML 中是很奇怪的，會提醒可能寫錯，應該用陣列語法 []-->
         <div :class="[isOpen ? 'translate-x-0' : 'translate-x-full', 'md:translate-x-0']"
-            class="bg-[#0B0D17]/15 backdrop-blur-[80px] fixed top-0 right-0 w-[254px] h-full px-[25px] md:bg-white/5 md:w-auto md:h-24 md:static md:flex lg:px-[64px]">
+            class="bg-[#0B0D17]/15 backdrop-blur-[80px] fixed top-0 right-0 w-[254px] h-full px-[25px] md:bg-white/5 md:w-auto md:h-24 md:static md:flex lg:px-16">
             <ul class="flex flex-col gap-8 p-[135px_0_135px_32px] md:flex-row md:p-[0_32px]">
                 <li v-for="(item, index) in navItems" @click="navigate(item.path)"
                     class="text-white flex gap-3 border-r-[3px] md:border-b-[3px] md:border-r-0 items-center cursor-pointer"
