@@ -10,9 +10,10 @@ const router = createRouter({
       // 路徑報錯 => ts不認得vue檔案，要到env.d.ts加入宣告
     },
         {
-      path: '/detail',
+          // 原先路徑用'/detail'寫死，導致後面卡片不能顯示他的路徑位置，要改成'/detail/:id'
+      path: '/detail/:id',
       name: 'detail',
-      component: () => import('../views/CardDetail.vue'),
+      component: () => import('../views/CountryCard.vue'),
     },
   ],
 })

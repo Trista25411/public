@@ -11,10 +11,10 @@ api網頁：https://restcountries.com/  篩選取得要的東西
 -->
 <template>
     <!-- 利用無障礙性: nav、main、selection、article -->
-    <nav class="navbar">
+    <nav class="navbar shadow">
         <h1 class="title">Where in the world?</h1>
         <button type="button" class="mode">
-            <ion-icon name="moon-outline"></ion-icon>
+            <span><ion-icon name="moon-outline"></ion-icon></span>
             <span>Dark Mode</span>
         </button>
     </nav>
@@ -29,13 +29,15 @@ api網頁：https://restcountries.com/  篩選取得要的東西
 body {
     padding: 0;
     margin: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
-    padding: 20px 40px;
-    box-shadow: 0 2px 5px rgba(128, 128, 128, 0.4);
+    padding: 15px 40px;
 }
 
 .mode {
