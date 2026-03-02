@@ -11,9 +11,10 @@ const router = createRouter({
     },
         {
           // 原先路徑用'/detail'寫死，導致後面卡片不能顯示他的路徑位置，要改成'/detail/:id'
+          // 讓每個卡片點進去都是他自己的 id 網頁資訊
       path: '/detail/:id',
-      name: 'detail',
-      component: () => import('../views/CountryCard.vue'),
+      name: 'country-detail',
+      component: () => import('../views/CountryView.vue'),
     },
   ],
 })

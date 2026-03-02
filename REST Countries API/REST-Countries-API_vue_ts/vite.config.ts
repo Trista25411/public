@@ -9,6 +9,8 @@ export default defineConfig({
   //   vue(),
   //   vueDevTools(),
   // ],
+
+  // 因ion-的icon報錯，改成以下內容
   plugins: [
     vue({
       template: {

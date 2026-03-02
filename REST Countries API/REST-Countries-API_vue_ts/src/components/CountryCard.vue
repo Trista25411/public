@@ -4,7 +4,10 @@ defineProps(['country'])
 </script>
 
 <template>
-    <article class="card">
+    <!-- 原先沒有寫v-if='country'，卡片會變白屏
+     => 因網路延遲或是父組件傳遞延遲，變成 undefined => 對「不存在的東西」要求它的屬性，會直接導致程式崩潰 => 程式就會試圖執行 undefined.flag
+     加上v-if => 告訴系統請先確認 country 真的有內容（不是 null 或 undefined），你才准開始畫這個 <article> 以及裡面的圖片和文字 -->
+    <article v-if="country" class="card shadow">
         <img :src="country.flag" :alt="country.name" class="pic">
         <div class="info">
             <h2>{{ country.name }}</h2>
@@ -20,7 +23,7 @@ defineProps(['country'])
             <div>
                 <span class="name">Capital:</span>
                 <!-- capital加問號是因為並非每個國家都有首都，若不存在就傳空值不讓程式卡住 -->
-                <span>{{ country.capital}}</span>
+                <span>{{ country.capital }}</span>
             </div>
         </div>
     </article>
@@ -29,30 +32,20 @@ defineProps(['country'])
 
 <style scoped>
 .card {
-    background-color: beige;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    height: 350px;
 }
 
 .pic {
-    background-color: aquamarine;
-    width: 200px;
-    height: 100px;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    width: 100%;
+    height: 150px;
 }
 
 .info {
-    padding: 10px 20px 50px;
     display: flex;
     flex-direction: column;
     gap: 5px;
+    padding: 10px 20px;
 }
 
-.name {
-    font-weight: 600;
-    margin-right: 5px;
-}
 </style>

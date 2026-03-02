@@ -10,9 +10,10 @@ api網頁：https://restcountries.com/  篩選取得要的東西
 -->
 <script setup>
 import { onMounted, ref } from 'vue';
-import CountryCard from './CountryCard.vue';
+import CountryCard from '../components/CountryCard.vue';
 import localData from '../assets/data.json';
 
+// 串接 API
 const countries = ref([])
 //  async 非同步作業 => 讓其他資訊不因串接api的時間延遲到
 const fetchCountries = async () => {
@@ -51,21 +52,29 @@ const fetchCountries = async () => {
     };
 };
 
+// filter 功能
+const filterConutry = ({
+    
+})
+
+
+
+// 將 API 資料匯入
 onMounted(() => {
     fetchCountries();
-})
+});
 </script>
 
 <template>
     <main class="content">
         <header class="top">
-            <div class="filter shadow pad-1">
-                <span class="pad-2"><ion-icon name="search-outline"></ion-icon></span>
+            <div class="search shadow">
+                <span><ion-icon name="search-outline"></ion-icon></span>
                 <input placeholder="Search for a country..."></input>
             </div>
             <div class="droplist">
-                <div class="shadow pad-1">
-                    <input placeholder="Filter by Region" class="pad-2"></input>
+                <div class="filter shadow">
+                    <span>Filter by Region</span>
                     <span><ion-icon name="chevron-down-outline"></ion-icon></span>
                 </div>
                 <ul class="dropdown"></ul>
@@ -88,10 +97,11 @@ a {
 
 input {
     border: none;
+    padding: 10px 5px;
 }
 
 .content {
-    padding: 40px;
+    padding: 80px;
 }
 
 .top {
@@ -100,18 +110,41 @@ input {
     justify-content: space-between;
 }
 
+.search,
 .filter {
     background-color: white;
-    width: 300px;
+    height: 50px;
     display: flex;
     align-items: center;
+    padding-left: 20px;
 }
 
-.pad-1 {
-    padding: 15px 0;
+.search {
+    min-width: 30%;
 }
 
-.pad-2 {
-    padding: 5px 15px 0 20px;
+.filter{
+    gap: 35px;
+}
+
+.droplist {
+    cursor: pointer;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+@media (max-width:768px) {
+    .top{
+        display: block;
+    }
+
+    .filter{
+        margin: 20px 0 -20px 0 ;
+    }
+    
 }
 </style>

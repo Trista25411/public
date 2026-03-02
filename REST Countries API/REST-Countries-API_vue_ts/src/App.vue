@@ -31,13 +31,17 @@ body {
     margin: 0;
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
+}
+
+ion-icon {
+    padding-right: 20px;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
-    padding: 15px 40px;
+    padding: 20px 80px;
 }
 
 .mode {
