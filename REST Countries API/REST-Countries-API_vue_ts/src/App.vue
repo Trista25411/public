@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 <!-- 
 homepage可以看到所有國家
 尋找國家用input處理
@@ -12,7 +14,9 @@ api網頁：https://restcountries.com/  篩選取得要的東西
 <template>
     <!-- 利用無障礙性: nav、main、selection、article -->
     <nav class="navbar shadow">
-        <h1 class="title">Where in the world?</h1>
+        <RouterLink to="/" class="title">
+            <h1>Where in the world?</h1>
+        </RouterLink>
         <button type="button" class="mode">
             <span><ion-icon name="moon-outline"></ion-icon></span>
             <span>Dark Mode</span>
@@ -42,6 +46,11 @@ ion-icon {
     display: flex;
     justify-content: space-between;
     padding: 20px 80px;
+}
+
+.title{
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .mode {

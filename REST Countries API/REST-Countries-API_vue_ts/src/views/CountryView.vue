@@ -1,42 +1,131 @@
-<script>
-import { ref } from 'vue';
+<script setup>
+import { computed, onMounted, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
+const country = ref(null);
+// 存取鄰國名稱變數
+const borderCountries = ref([]);
 
 // 匯入 api 詳細資料
 const fetchCountries = async () => {
-try{
-    const res = await fetch('')
-}
-}
+    // 判斷是否有值
+    // if(!route.params.id) return;
+    // 判斷是不是在這裡出問題
+    // console.log('ID 是:', route.params.id);
+    
+    try {
+        // 1. 抓取目前國家資訊
+        const res = await fetch(`https://restcountries.com/v3.1/alpha/${route.params.id}`);
+        const data = await res.json();
+        country.value = data[0];
 
+        // 2. 擷取鄰國資訊
+        // 為了不讓系統報錯卡死，設定兩個條件
+        //     √ 有沒有這個欄位          √ 鄰國數量是不是大於零, 若是空的就不用去執行 fetch
+        if (country.value.borders && country.value.borders.length > 0) {
+            const codes = country.value.borders.join(',');
+            const borderRes = await fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}&fields=name,cca3`);
+            const borderData = await borderRes.json();
+            borderCountries.value = borderData.map(border => ({
+                name: border.name.common,
+                id: border.cca3,
+            }));
+        } else {
+            borderCountries.value = [];
+        }
+    } catch (error) {
+        console.error('抓取資料失敗, error');
+    };
+};
 
-const LeftInfo = [
-    { lable: 'Native Name', value: '' },
-    { lable: '' }
-]
+// 左側清單生成
+// computed 內部使用 country.value => 變數依賴於 country 
+// 剛進入country是null, computed回傳空值；
+// 當 fetchCountries完成, country.value被填入資料時，發現變數變了
+// computed會立即重新計算並更新到模板
+const leftInfo = computed(() => [
+    // value 值不同
+    // population 跟 region 的 key 是固定的
+    // 不會因不同國家名稱而不同 => 直接使用country.value.xxxx來使用
+    // 但 currencies 或是 languages...每個國家不太一樣
+    // => 利用 Object.values(xxxx), 這樣就會變成陣列, 不用管每個國家的不同
+    // EX: 取得nativeName物件, 用Object.values變成陣列, 取出第0項，拿出.common屬性, 並把內容轉成字串顯示正確文字
+    // ?.[0] => 去陣列化，不要顯示 [....]
+    { label: 'Native Name:', value: Object.values(country.value?.name?.nativeName || {})[0]?.common || 'N/A' },
+    { label: 'Population:', value: country.value?.population.toLocaleString() },
+    { label: 'Region:', value: country.value?.region },
+    { label: 'Sub Region:', value: country.value?.subregion },
+    { label: 'Capital:', value: country.value?.capital?.[0] || 'N/A' },
+]);
 
+// 右側清單生成
+const rightInfo = computed(() => [
+    { label: 'Top Level Domain:', value: country.value?.tld?.[0] || 'N/A' },
+    { label: 'Currencies:', value: Object.values(country.value?.currencies || {}).map(country => country.name).join(',') },
+    { label: 'Languages:', value: Object.values(country.value?.languages || {}).join(',') }
+]);
+
+// 點選鄰國名稱跳轉
+const goToBorder = (id) => {
+    router.push(`/detail/${id}`);
+};
+
+// 匯入 fetchCountries
+// 點選 border-countries => 網址變了但沒有重新執行 
+// 因 vue會複用組件, onMounted 不會刷新頁面
+// 但設定 watch 後一直報錯, 可能是抓取參數時間差(尚未準備好資料所以顯示了undefined)
+// onMounted(fetchCountries);
+
+// 新增一個新的監聽器重新刷新
+watch(
+    () => route.params.id,
+    (newId) => {
+        if (newId) {
+            fetchCountries();
+        }
+    },
+    // 讓組件一建立就先執行一次 fetchCountries
+    { immediate: true } 
+)
 </script>
 
 <template>
-    <div class="container">
-        <button type="button" class="back">
+    <div class="container" v-if="country">
+        <button type="button" @click="router.back()" class="back">
             <span><ion-icon name="arrow-back-outline"></ion-icon></span>
             <span>Back</span>
         </button>
         <div class="info-content">
-            <img src="" alt="">
-            <div class="info">
-                <div class="country"></div>
-                <div v-for="item in LeftInfo" :key="item.label" class="info-left">
-                    <div>
-                        <span class="name"></span>
-                        <span></span>
+            <img :src="country.flags.svg" :alt="country.name.common">
+            <div>
+                <h1 class="country">{{ country.name.common }}</h1>
+                <div class="info">
+                    <div class="info-column">
+                        <div v-for="item in leftInfo" :key="item.label">
+                            <span class="detail-label">{{ item.label }}</span>
+                            <span>{{ item.value }}</span>
+                        </div>
+                    </div>
+                    <div class="info-column">
+                        <div v-for="item in rightInfo" :key="item.label">
+                            <span class="detail-label">{{ item.label }}</span>
+                            <span>{{ item.value }}</span>
+                        </div>
                     </div>
                 </div>
-                <div class="info-right">
-                    <div>
-                        <span class="name"></span>
-                        <span></span>
-                    </div>
+                <div class="btm">
+                    <span class="name">Border Countries:</span>
+                    <!-- 
+                    borders欄位儲存的是鄰國的 ISO 3166-1 alpha-3 代碼, 要先進行處理再將資料轉成看得懂的國家名稱
+                    1. 判斷目前國家是否有borders欄位
+                    2. 使用 api aplha查詢，一次傳入代碼
+                    3. 將回傳的國家清單存成一個新 ref
+                    4. 使用v-for跑清單, 點擊按鈕透過router.path跳轉頁面
+                    -->
+                    <button type="button" v-for="item in borderCountries" :key="item.id" @click="goToBorder(item.id)"
+                        class="border-countries">{{ item.name }}</button>
                 </div>
             </div>
         </div>
@@ -44,8 +133,19 @@ const LeftInfo = [
 </template>
 
 <style scoped>
+button {
+    cursor: pointer;
+}
+
+img {
+    width: 40%;
+    height: 400px;
+}
+
 .container {
+    background-color: cadetblue;
     padding: 60px 80px;
+    overflow-x: hidden;
 }
 
 .back {
@@ -53,5 +153,49 @@ const LeftInfo = [
     border: none;
     box-shadow: 0 0 10px rgba(128, 128, 128, 0.3);
     padding: 10px 30px;
+    margin-bottom: 60px;
+}
+
+.info-content {
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.info {
+    display: flex;
+    gap: 80px;
+    margin-bottom: 50px;
+}
+
+.info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btm {
+    display: flex;
+    gap: 10px;
+}
+
+.detail-label {
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.border-countries {
+    background-color: var(--color-back);
+    border: none;
+    box-shadow: 0 0 3px rgba(128, 128, 128, 0.9);
+    padding: 5px 10px;
+    margin-bottom: 60px;
+}
+
+@media (max-width:1100px) {
+    .info {
+        display: block;
+    }
 }
 </style>

@@ -16,7 +16,7 @@ import localData from '../assets/data.json';
 // 串接 API
 const countries = ref([])
 //  async 非同步作業 => 讓其他資訊不因串接api的時間延遲到
-const fetchCountries = async () => {
+const fetchCountries = async () => {    
     try {
         // 串接 api 網址，需要一點時間
         // await讓程式抓取資料再繼續下去，避免抓到空資料
