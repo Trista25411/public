@@ -1,12 +1,33 @@
-<script setup>
-import { computed, onMounted, ref, watch } from 'vue';
+<script setup lang="ts">
+import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
-const country = ref(null);
+// <country | null> => 變數一開始是 null, 但之後存入符合country的物件
+const country = ref<Country | null>(null);
 // 存取鄰國名稱變數
-const borderCountries = ref([]);
+const borderCountries = ref<borderCountries[]>([]);
+
+// ts 先定義結構
+interface borderCountries {
+    name: string;
+    id: string;
+};
+
+// 定義 API 回傳格式結構
+interface Country {
+    name: { common: string; nativeName?: Record<string, { common: string }>; };
+    flags: { svg: string; png: string };
+    population: number;
+    region: string;
+    subregion: string;
+    capital?: string[];
+    tld?: string[];
+    currencies?: Record<string, { name: string }>;
+    languages?: Record<string, string>;
+    borders?: string[];
+}
 
 // 匯入 api 詳細資料
 const fetchCountries = async () => {
@@ -14,12 +35,12 @@ const fetchCountries = async () => {
     // if(!route.params.id) return;
     // 判斷是不是在這裡出問題
     // console.log('ID 是:', route.params.id);
-    
+
     try {
         // 1. 抓取目前國家資訊
         const res = await fetch(`https://restcountries.com/v3.1/alpha/${route.params.id}`);
         const data = await res.json();
-        country.value = data[0];
+        country.value = data[0] as Country;
 
         // 2. 擷取鄰國資訊
         // 為了不讓系統報錯卡死，設定兩個條件
@@ -28,7 +49,7 @@ const fetchCountries = async () => {
             const codes = country.value.borders.join(',');
             const borderRes = await fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}&fields=name,cca3`);
             const borderData = await borderRes.json();
-            borderCountries.value = borderData.map(border => ({
+            borderCountries.value = borderData.map((border:any) => ({
                 name: border.name.common,
                 id: border.cca3,
             }));
@@ -68,7 +89,7 @@ const rightInfo = computed(() => [
 ]);
 
 // 點選鄰國名稱跳轉
-const goToBorder = (id) => {
+const goToBorder = (id:string) => {
     router.push(`/detail/${id}`);
 };
 
@@ -87,7 +108,7 @@ watch(
         }
     },
     // 讓組件一建立就先執行一次 fetchCountries
-    { immediate: true } 
+    { immediate: true }
 )
 </script>
 
@@ -124,8 +145,10 @@ watch(
                     3. 將回傳的國家清單存成一個新 ref
                     4. 使用v-for跑清單, 點擊按鈕透過router.path跳轉頁面
                     -->
-                    <button type="button" v-for="item in borderCountries" :key="item.id" @click="goToBorder(item.id)"
-                        class="border-countries">{{ item.name }}</button>
+                    <span class="border-all">
+                        <button type="button" v-for="item in borderCountries" :key="item.id"
+                            @click="goToBorder(item.id)" class="border-countries">{{ item.name }}</button>
+                    </span>
                 </div>
             </div>
         </div>
@@ -135,29 +158,28 @@ watch(
 <style scoped>
 button {
     cursor: pointer;
+    border: none;
 }
 
 img {
-    width: 40%;
-    height: 400px;
+    width: 500px;
+    border: 1px solid gray;
 }
 
 .container {
-    background-color: cadetblue;
     padding: 60px 80px;
     overflow-x: hidden;
 }
 
 .back {
-    background-color: var(--color-back);
-    border: none;
+    background-color: var(--color-ele);
     box-shadow: 0 0 10px rgba(128, 128, 128, 0.3);
     padding: 10px 30px;
     margin-bottom: 60px;
+    color: var(--color-text);
 }
 
 .info-content {
-    background-color: antiquewhite;
     display: flex;
     align-items: center;
     gap: 50px;
@@ -172,12 +194,14 @@ img {
 .info-column {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
+    margin-top: 40px;
 }
 
 .btm {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .detail-label {
@@ -186,16 +210,51 @@ img {
 }
 
 .border-countries {
-    background-color: var(--color-back);
-    border: none;
+    background-color: var(--color-ele);
     box-shadow: 0 0 3px rgba(128, 128, 128, 0.9);
     padding: 5px 10px;
-    margin-bottom: 60px;
+    margin-right: 10px;
+    color: var(--color-text);
 }
 
-@media (max-width:1100px) {
+@media (max-width:1399px) {
+    .info-content {
+        display: block;
+        width: 100%;
+    }
+
     .info {
         display: block;
+    }
+}
+
+@media (max-width:711px) {
+    .container {
+        padding: 40px;
+    }
+
+    .btm {
+        display: block;
+    }
+}
+
+@media (max-width:593px) {
+    img {
+        width: 80%;
+    }
+
+    .border-all {
+        display: block;
+    }
+
+    .border-countries {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width:425px) {
+    .container {
+        width: 90%;
     }
 }
 </style>

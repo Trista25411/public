@@ -1,23 +1,25 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 
+const isDark = ref(false); //預設淺色模式
+const darkMode = () => {
+    isDark.value = !isDark.value;
+    if (isDark.value) {
+        // 增加 classlist, 沒辦法直接匯入base.css資訊，要在下方再寫一次
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    };
+};
 </script>
-<!-- 
-homepage可以看到所有國家
-尋找國家用input處理
-篩選用國家
-點選國家打開分頁可以查看更多
-可以點鄰近國家
-可以切換深夜模式 
-api網頁：https://restcountries.com/  篩選取得要的東西
-若網頁API掛掉，可以用本地的data.json
--->
+
 <template>
     <!-- 利用無障礙性: nav、main、selection、article -->
-    <nav class="navbar shadow">
+    <nav class="navbar">
         <RouterLink to="/" class="title">
             <h1>Where in the world?</h1>
         </RouterLink>
-        <button type="button" class="mode">
+        <button type="button" class="mode" @click="darkMode">
             <span><ion-icon name="moon-outline"></ion-icon></span>
             <span>Dark Mode</span>
         </button>
@@ -26,6 +28,23 @@ api網頁：https://restcountries.com/  篩選取得要的東西
 </template>
 
 <style>
+:root {
+    --color-back: hsl(0, 0%, 99%);
+    --color-ele: hsl(0, 100%, 100%);
+    --color-text: hsl(200, 15%, 8%);
+    --color-input: hsl(0, 0%, 50%);
+    --color-hover-bg: hsl(207, 26%, 17%);
+    --color-hover-text: hsl(0, 100%, 100%);
+}
+
+body.dark-mode {
+    --color-back: hsl(207, 26%, 17%);
+    --color-ele: hsl(209, 23%, 22%);
+    --color-text: hsl(0, 100%, 100%);
+    --color-hover-bg: hsl(0, 0%, 99%);
+    --color-hover-text: hsl(200, 15%, 8%);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -38,17 +57,18 @@ body {
     overflow-x: hidden;
 }
 
-ion-icon {
-    padding-right: 20px;
+span{
+    font-size: var(--size-base);
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     padding: 20px 80px;
+    box-shadow: var(--shadow);
 }
 
-.title{
+.title {
     text-decoration: none;
     cursor: pointer;
 }
@@ -60,7 +80,28 @@ ion-icon {
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     padding: 0 20px;
+    color: var(--color-text);
+}
+
+.mode:hover {
+    background-color: var(--color-hover-bg);
+    color: var(--color-hover-text);
+}
+
+@media (max-width:768px) {
+    .navbar{
+        padding: 20px;
+    }
+    .mode{
+        padding: 10px;
+    }
+}
+
+@media (max-width:425px) {
+    .navbar{
+        padding: 10px;
+    }
 }
 </style>

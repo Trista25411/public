@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 // 定義接收的資料結構 => 預期會在HomeView裡面接受到country的東西
 defineProps(['country'])
 </script>
@@ -7,7 +7,7 @@ defineProps(['country'])
     <!-- 原先沒有寫v-if='country'，卡片會變白屏
      => 因網路延遲或是父組件傳遞延遲，變成 undefined => 對「不存在的東西」要求它的屬性，會直接導致程式崩潰 => 程式就會試圖執行 undefined.flag
      加上v-if => 告訴系統請先確認 country 真的有內容（不是 null 或 undefined），你才准開始畫這個 <article> 以及裡面的圖片和文字 -->
-    <article v-if="country" class="card shadow">
+    <article v-if="country" class="card">
         <img :src="country.flag" :alt="country.name" class="pic">
         <div class="info">
             <h2>{{ country.name }}</h2>
@@ -34,6 +34,14 @@ defineProps(['country'])
 .card {
     width: 100%;
     height: 350px;
+    background-color: var(--color-ele);
+    color: var(--color-text);
+    box-shadow: var(--shadow);
+}
+
+.card:hover{
+    background-color: var(--color-hover-bg);
+    color: var(--color-hover-text);
 }
 
 .pic {
@@ -45,7 +53,12 @@ defineProps(['country'])
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 10px 20px;
+    padding: 20px;
 }
 
+@media (max-width:600px) {
+    .card{
+        height: auto;
+    } 
+}
 </style>
