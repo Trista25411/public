@@ -28,6 +28,7 @@ import NavBar from '@/components/NavBar.vue';
 <style scoped>
 .home-container {
     width: 100%;
+    height: 100vh;
     background-image: url(../assets/Render-1.jpg);
     background-position: center;
     background-size: cover;
