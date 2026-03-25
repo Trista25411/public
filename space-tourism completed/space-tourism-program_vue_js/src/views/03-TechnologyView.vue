@@ -57,4 +57,10 @@ const getImg = (name) => {
     background-position: center;
     background-size: cover;
 }
+
+@media (max-width:1440px) {
+    .home-container{
+        height: auto;
+    }   
+}
 </style>
