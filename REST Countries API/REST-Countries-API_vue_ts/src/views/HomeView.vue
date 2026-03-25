@@ -51,7 +51,7 @@ const fetchCountries = async () => {
             population: item.population,
             region: item.region,
             capital: item.capital?.[0],
-            flag: item.flags.png
+            flag: item.flags.svg || item.flags.png
         }));
     } catch (error) {
         console.warn('API出錯, 改用本地資料data.json');
@@ -84,13 +84,13 @@ const filtercountries = computed(() => {
     });
 });
 
-const setRegion = (region:string) => {
+const setRegion = (region: string) => {
     selectRegion.value = region;
     isOpenDrop.value = false;
 };
 
 // 點擊頁面關閉下拉選單
-const handleClick = (event:MouseEvent) => {
+const handleClick = (event: MouseEvent) => {
     // as Node 定義為 DOM 節點, 才能使用contains()
     if (dropListRef.value && !dropListRef.value.contains(event.target as Node)) {
         isOpenDrop.value = false;

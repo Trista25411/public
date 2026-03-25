@@ -64,6 +64,7 @@ span{
 .navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 20px 80px;
     box-shadow: var(--shadow);
 }
@@ -75,6 +76,7 @@ span{
 
 .mode {
     background-color: transparent;
+    height: 60px;
     border: 0.5px solid rgba(159, 159, 159, 0.5);
     border-radius: 50px;
     cursor: pointer;
@@ -95,7 +97,8 @@ span{
         padding: 20px;
     }
     .mode{
-        padding: 10px;
+        height: 40px;
+        padding: 0 10px;
     }
 }
 
